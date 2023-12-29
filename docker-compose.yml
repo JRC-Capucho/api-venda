@@ -1,0 +1,9 @@
+services:
+
+  apivenda:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: docker
+    ports:
+      - 5432:5432
+
