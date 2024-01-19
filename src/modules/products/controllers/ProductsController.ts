@@ -9,7 +9,7 @@ export default class ProductsController {
   public async index(request: Request, response: Response): Promise<Response> {
     const listProducts = new ListProductService();
 
-    const products = listProducts.execute();
+    const products = await listProducts.execute();
 
     return response.json(products);
   }
@@ -29,9 +29,7 @@ export default class ProductsController {
 
     const createProduct = new CreateProductService();
 
-    const product = createProduct.execute({ name, price, quantity });
-
-    console.log(product);
+    const product = await createProduct.execute({ name, price, quantity });
 
     return response.json(product);
   }
@@ -43,7 +41,7 @@ export default class ProductsController {
 
     const updateProduct = new UpdateProductService();
 
-    const product = updateProduct.execute({ id, name, price, quantity });
+    const product = await updateProduct.execute({ id, name, price, quantity });
 
     return response.json(product);
   }

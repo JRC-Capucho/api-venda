@@ -23,7 +23,7 @@ class UpdateProductService {
 
     if (!product) throw new AppError("Product not found.");
 
-    const productExist = await productRepository.findOne(name);
+    const productExist = await productRepository.findByName(name);
 
     if (productExist && name !== product.name)
       throw new AppError("There is already one product with this name.");
