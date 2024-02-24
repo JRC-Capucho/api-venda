@@ -1,27 +1,28 @@
 import AppError from "@shared/errors/AppError";
-import User from "../typeorm/entities/User";
 import { getCustomRepository } from "typeorm";
 import UsersRepository from "../typeorm/repositories/UsersRepository";
 import UserTokensRepository from "../typeorm/repositories/UserTokensRepository";
+import EtherealMail from "@config/mail/EtherealMail";
 
 interface IRequest {
   email: string;
 }
 class SendForgotPasswordEmailService {
   public async execute({ email }: IRequest): Promise<void> {
+    const usersRepository = getCustomRepository(UsersRepository);
 
-    const usersRepository = getCustomRepository(UsersRepository)
+    const userTokenRepository = getCustomRepository(UserTokensRepository);
 
-    const userTokenRepository = getCustomRepository(UserTokensRepository)
+    const user = await usersRepository.findByEmail(email);
 
-    const user = await usersRepository.findByEmail(email)
+    if (!user) throw new AppError("User does not exists.", 404);
 
+    const token = await userTokenRepository.generate(user.id);
 
-    if (!user) throw new AppError("User does not exists.", 404)
-
-    const token = await userTokenRepository.generate(user.id)
-
-    console.log(token);
+    await EtherealMail.sendMail({
+      to: email,
+      body: `Solicitacao de redefinicao de senha recebida: ${token?.token}`,
+    });
   }
 }
 

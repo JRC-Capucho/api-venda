@@ -9,6 +9,6 @@ const routes = Router();
 routes.use("/products", productsRouter);
 routes.use("/users", usersRouter);
 routes.use("/sessions", sessionRouter);
-routes.use('/password', passwordsRouter)
+routes.use('/passwords', passwordsRouter)
 
 export default routes;
