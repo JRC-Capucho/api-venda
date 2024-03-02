@@ -3,6 +3,7 @@ services:
     container_name: postgres
     image: postgres
     environment:
+      POSTGRES_DB: apivendas
       POSTGRES_PASSWORD: docker
     ports:
       - 5432:5432
