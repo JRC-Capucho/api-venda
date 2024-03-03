@@ -1,1 +1,3 @@
-export class OrdersRepository {}
+export class OrdersRepository {
+  async findById(): Promise<void> {}
+}
