@@ -4,10 +4,12 @@ import CustomersRepository from "../typeorm/repositories/CustomerRepository";
 
 class ListCustomerService {
   public async execute(): Promise<Customer[]> {
-    const customerRepository = getCustomRepository(CustomersRepository);
-
-    const customers = customerRepository.find();
-
+    const customersRepository = getCustomRepository(CustomersRepository);
+    const customers = customersRepository
+      .createQueryBuilder()
+      .skip(0)
+      .take(10)
+      .getMany();
     return customers;
   }
 }
