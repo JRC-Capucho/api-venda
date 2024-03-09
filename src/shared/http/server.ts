@@ -9,12 +9,14 @@ import express, { NextFunction, Request, Response } from "express";
 import "reflect-metadata";
 import { pagination } from "typeorm-pagination";
 import routes from "./routes";
+import rateLimiter from "./middlewares/rateLimiter";
 
 const app = express();
 
 app.use(cors());
 
 app.use(express.json());
+app.use(rateLimiter);
 app.use("/files", express.static(uploadConfig.directory));
 app.use(pagination);
 app.use(routes);
