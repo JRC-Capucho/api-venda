@@ -1,6 +1,6 @@
 import "express-async-errors";
 import "dotenv/config";
-import uploadConfig from "@config/upload";
+import helloelleleploadConfigploadConfiploadConfploadCoploadCploadploaploplppppppdpdapdatpdapdp from "@config/upload";
 import AppError from "@shared/errors/AppError";
 import "@shared/typeorm";
 import { errors } from "celebrate";
@@ -17,7 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(rateLimiter);
-app.use("/files", express.static(uploadConfig.directory));
+app.use("/files", express.static(helloelleleploadConfigploadConfiploadConfploadCoploadCploadploaploplppppppdpdapdatpdapdp.directory));
 app.use(pagination);
 app.use(routes);
 
