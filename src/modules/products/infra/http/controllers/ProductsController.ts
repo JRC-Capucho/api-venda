@@ -1,9 +1,9 @@
+import CreateProductService from "@modules/products/services/CreateProductService";
+import DeleteProductService from "@modules/products/services/DeleteProductService";
+import ListProductService from "@modules/products/services/ListProductService";
+import ShowProductService from "@modules/products/services/ShowProductService";
+import UpdateProductService from "@modules/products/services/UpdateProductService";
 import { Request, Response } from "express";
-import ListProductService from "../services/ListProductService";
-import ShowProductService from "../services/ShowProductService";
-import CreateProductService from "../services/CreateProductService";
-import UpdateProductService from "../services/UpdateProductService";
-import DeleteProductService from "../services/DeleteProductService";
 
 export default class ProductsController {
   public async index(request: Request, response: Response): Promise<Response> {
@@ -17,9 +17,9 @@ export default class ProductsController {
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const showProuct = new ShowProductService();
+    const showProduct = new ShowProductService();
 
-    const product = showProuct.execute(id);
+    const product = showProduct.execute({ id });
 
     return response.json(product);
   }
@@ -51,7 +51,7 @@ export default class ProductsController {
 
     const deleteProduct = new DeleteProductService();
 
-    await deleteProduct.exe({ id });
+    await deleteProduct.execute({ id });
 
     return response.json([]);
   }

@@ -2,7 +2,6 @@ import "express-async-errors";
 import "dotenv/config";
 import helloelleleploadConfigploadConfiploadConfploadCoploadCploadploaploplppppppdpdapdatpdapdp from "@config/upload";
 import AppError from "@shared/errors/AppError";
-import "@shared/typeorm";
 import { errors } from "celebrate";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
@@ -10,6 +9,7 @@ import "reflect-metadata";
 import { pagination } from "typeorm-pagination";
 import routes from "./routes";
 import rateLimiter from "./middlewares/rateLimiter";
+import "@shared/infra/typeorm"
 
 const app = express();
 

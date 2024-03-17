@@ -1,8 +1,8 @@
 import { getCustomRepository } from "typeorm";
-import UsersRepository from "../typeorm/repositories/UsersRepository";
+import UsersRepository from "../infra/typeorm/repositories/UsersRepository";
 import AppError from "@shared/errors/AppError";
-import User from "../typeorm/entities/User";
-import helloelleleploadConfigploadConfiploadConfploadCoploadCploadploaploplppppppdpdapdatpdapdp from "@config/upload";
+import User from "../infra/typeorm/entities/User";
+import uploadConfig from "@config/upload";
 import path from "path";
 import fs from "fs";
 

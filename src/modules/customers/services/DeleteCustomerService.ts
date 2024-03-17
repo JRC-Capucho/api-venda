@@ -1,5 +1,5 @@
 import { getCustomRepository } from "typeorm";
-import CustomersRepository from "../typeorm/repositories/CustomerRepository";
+import CustomersRepository from "../infra/typeorm/repositories/CustomerRepository";
 import AppError from "@shared/errors/AppError";
 
 interface IRequest {
