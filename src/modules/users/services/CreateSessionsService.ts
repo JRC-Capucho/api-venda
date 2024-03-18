@@ -2,22 +2,14 @@ import { getCustomRepository } from "typeorm";
 import UsersRepository from "../infra/typeorm/repositories/UsersRepository";
 import AppError from "@shared/errors/AppError";
 import { compare } from "bcryptjs";
-import User from "../infra/typeorm/entities/User";
 import { sign } from "jsonwebtoken";
+import { ICreateSession } from "../domain/models/ICreateSession";
+import { IResponseSession } from "../domain/models/IResponseSession";
 import authConfig from "@config/auth";
 
-interface IRequest {
-  email: string;
-  password: string;
-}
-
-interface IResponse {
-  user: User;
-  token: string;
-}
 
 class CreateSessionService {
-  public async execute({ email, password }: IRequestl): Promise<IResponse> {
+  public async execute({ email, password }: ICreateSession): Promise<IResponseSession> {
     const userRepository = getCustomRepository(UsersRepository);
 
     const user = await userRepository.findByEmail(email);
@@ -29,7 +21,7 @@ class CreateSessionService {
     if (!matched)
       throw new AppError("Incorrect email/password combination.", 401);
 
-    const token = sign({}, authConfig.jwt.secret, {
+    const token = sign({}, authConfig.jwt.secret as string, {
       subject: user.id,
       expiresIn: authConfig.jwt.expiresIn,
     });

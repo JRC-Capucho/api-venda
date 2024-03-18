@@ -7,11 +7,8 @@ import EtherealMail from "@config/mail/EtherealMail";
 import SESMail from '@config/mail/SESMail'
 import mailConfig from '@config/mail/mail'
 
-interface IRequest {
-  email: string;
-}
 class SendForgotPasswordEmailService {
-  public async execute({ email }: IRequest): Promise<void> {
+  public async execute(email: string): Promise<void> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const userTokenRepository = getCustomRepository(UserTokensRepository);

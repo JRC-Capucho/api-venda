@@ -2,15 +2,10 @@ import { getCustomRepository } from "typeorm";
 import Customer from "../infra/typeorm/entities/Customer";
 import AppError from "@shared/errors/AppError";
 import CustomersRepository from "../infra/typeorm/repositories/CustomerRepository";
-
-interface IRequest {
-  id: string;
-  name: string;
-  email: string;
-}
+import { IUpdateCustomer } from "../domain/models/IUpdateCustomer";
 
 export default class UpdateCustomerService {
-  async execute({ id, name, email }: IRequest): Promise<Customer> {
+  async execute({ id, name, email }: IUpdateCustomer): Promise<Customer> {
     const customersRepository = getCustomRepository(CustomersRepository);
 
     const customer = await customersRepository.findById(id);

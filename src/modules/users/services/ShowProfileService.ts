@@ -3,12 +3,8 @@ import User from "../infra/typeorm/entities/User";
 import UsersRepository from "../infra/typeorm/repositories/UsersRepository";
 import AppError from "@shared/errors/AppError";
 
-interface IRequest {
-  user_id: string;
-}
-
 export class ShowProfileService {
-  async execute({ user_id }: IRequest): Promise<User> {
+  async execute(user_id: string): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const user = await usersRepository.findById(user_id);

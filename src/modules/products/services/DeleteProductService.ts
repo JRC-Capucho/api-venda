@@ -1,14 +1,11 @@
 import AppError from "@shared/errors/AppError";
 import { getCustomRepository } from "typeorm";
-import { RedisCache } from "@shared/cache/RedisCache";
+import redisCache from "@shared/cache/RedisCache";
 import { ProductRepository } from "../infra/typeorm/repositories/ProductsRepository";
 
-interface IRequest {
-  id: string;
-}
 
 class DeleteProductService {
-  public async execute({ id }: IRequest): Promise<void> {
+  public async execute(id: string): Promise<void> {
     const productRepository = getCustomRepository(ProductRepository);
 
     const product = await productRepository.findOne(id);

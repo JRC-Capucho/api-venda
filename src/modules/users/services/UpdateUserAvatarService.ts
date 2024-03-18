@@ -5,14 +5,11 @@ import User from "../infra/typeorm/entities/User";
 import uploadConfig from "@config/upload";
 import path from "path";
 import fs from "fs";
+import { IUpdateAvatarProfile } from "../domain/models/IUpdateAvatarProfile";
 
-interface IRequest {
-  user_id: string;
-  avatarFilename: string;
-}
 
 class UpdateUserAvatarService {
-  public async execute({ user_id, avatarFilename }: IRequest): Promise<User> {
+  public async execute({ user_id, avatarFilename }: IUpdateAvatarProfile): Promise<User> {
     const usersRepository = getCustomRepository(UsersRepository);
 
     const user = await usersRepository.findById(user_id);
@@ -20,7 +17,7 @@ class UpdateUserAvatarService {
     if (!user) throw new AppError("User not found.");
 
     if (user.avatar) {
-      const userAvatarFilePath = path.join(helloelleleploadConfigploadConfiploadConfploadCoploadCploadploaploplppppppdpdapdatpdapdp.directory, user.avatar);
+      const userAvatarFilePath = path.join(uploadConfig.directory, user.avatar);
       const userAvatarfileExist = await fs.promises.stat(userAvatarFilePath);
 
       if (userAvatarfileExist) await fs.promises.unlink(userAvatarFilePath);

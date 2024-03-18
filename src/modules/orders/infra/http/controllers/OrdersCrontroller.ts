@@ -8,7 +8,7 @@ export class OrdersController {
 
     const showOrder = new ShowOrderService();
 
-    const order = await showOrder.execute({ id });
+    const order = await showOrder.execute(id);
 
     return response.json(order);
   }

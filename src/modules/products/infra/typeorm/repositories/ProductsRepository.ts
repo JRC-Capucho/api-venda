@@ -1,12 +1,11 @@
 import { EntityRepository, In, Repository } from "typeorm";
 import Product from "../entities/Product";
+import { IProductsRepository } from "@modules/products/domain/models/IProductsRepository";
+import { IFindProducts } from "@modules/products/domain/models/IFindProducts";
 
-interface IFindProducts {
-  id: string;
-}
 
 @EntityRepository(Product)
-export class ProductRepository extends Repository<Product> {
+export class ProductRepository extends Repository<Product> implements IProductsRepository {
   public async findByName(name: string): Promise<Product | undefined> {
     const product = await this.findOne({
       where: {
